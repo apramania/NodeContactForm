@@ -2,6 +2,10 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const path = require('path')
 const nodemailer = require('nodemailer')
+const dotenv = require('dotenv')
+
+//Load Config
+dotenv.config({ path : './config.env'})
 
 const app = express()
 
@@ -44,8 +48,8 @@ app.post('/send', async (req, res) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'we.foodie.premi@gmail.com', // generated ethereal user
-      pass: 'pmkarbitzpgbzocs', // generated ethereal password
+      user:  process.env.MAIL_ID, // generated ethereal user
+      pass: process.env.MAIL_PASS, // generated ethereal password
     },
     tls:{
         rejectUnauthorized: false
